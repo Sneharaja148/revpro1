@@ -124,46 +124,56 @@
     </div>
   </div></div><div class="j-card__footer"><div class="j-button-group"><button class="j-button j-button-size__medium primary" aria-label="Recharge" iconposition="left" tabindex="-1"><div style="flex-basis: unset;">Recharge</div></button><button class="j-button j-button-size__medium tertiary" aria-label="View details" iconposition="left" tabindex="-1"><div style="flex-basis: unset;">View details</div></button></div></div></div></div> -->
 
-  <div>
+  <!-- <div>
     <button mat-button (click)="selectType('individual')">Individual</button>
     <button mat-button (click)="selectType('business')">Business</button>
+  </div> -->
+
+  <div class="toggle-buttons">
+    <mat-button-toggle-group [(ngModel)]="selectedType" class="toggle-group">
+      <mat-button-toggle value="individual" class="toggle-button" (click)="selectType('individual')">Individual</mat-button-toggle>
+      <mat-button-toggle value="business" class="toggle-button" (click)="selectType('business')">Business</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
   <div class="card-container">
-    
-    <mat-card *ngFor="let planitems of plans" class="card">
+    <mat-card *ngFor="let planitems of getFilteredPlans()" class="card">
       <mat-card-header class="card-header">
         <div mat-card-avatar class="header-avatar">
           <!-- You can add an avatar if needed -->
         </div>
         <mat-card-title>
-          <h3 class="card-price">{{ planitems.cost }}</h3>
+          <h3 class="card-price">₹{{ planitems.plan_price }}</h3>
         </mat-card-title>
         <mat-card-subtitle>
-          <div class="badge">{{planitems.name}}</div>
+          <div class="badge">{{ planitems.plan_name }}</div>
         </mat-card-subtitle>
       </mat-card-header>
-
+  
       <mat-card-content>
         <div class="icons">
           <img class="icon" src="https://jep-asset.akamaized.net/jiocom/static/images/ic_jiotv-n.svg" alt="JioTV logo">
           <img class="icon" src="https://jep-asset.akamaized.net/jiocom/static/images/Z0072.svg" alt="Netflix logo">
           <div class="more-info">++2 more</div>
         </div>
-
+  
         <div class="details-info">
           <div class="info">
             <div class="info-title">Speed</div>
-            <div class="info-value">{{planitems.speed}}</div>
+            <div class="info-value">{{ planitems.plan_speed }}</div>
           </div>
           <div class="info">
             <div class="info-title">Internet</div>
-            <div class="info-value">{{planitems.internet}}</div>
+            <div class="info-value">{{ planitems.plan_speed }}</div>
           </div>
         </div>
       </mat-card-content>
-
+  
       <mat-card-actions class="card-footer">
         <button mat-button class="button primary" aria-label="Recharge">Recharge</button>
         <button mat-button class="button tertiary" aria-label="View details">View details</button>
       </mat-card-actions>
     </mat-card>
+  </div>
+
+ 
+

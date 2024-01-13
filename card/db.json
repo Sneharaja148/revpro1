@@ -2,7 +2,7 @@
   "plans": [
     {
       "id": 1,
-      "name": "Basic Monthly Plan",
+      "name": "individual plan",
       "internet": "High Speed",
       "speed": "100 Mbps",
       "calls": "Unlimited",

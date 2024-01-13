@@ -7,25 +7,33 @@ import { MatCardModule } from '@angular/material/card';
 import { AppComponent } from './app.component';
 import { BasicPlanComponent } from './basic-plan/basic-plan.component';
 import { MaterialModule } from './material/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { i_plans } from '../../card';
 import { UserPlanComponent } from './user-plan/user-plan.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+
+
+
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicPlanComponent,
-    UserPlanComponent
-  
+    UserPlanComponent,
+    
+   
+    
   ],
   imports: [
     BrowserModule,
@@ -39,9 +47,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonToggleModule,
+    
+    
   ],
-  providers: [],
+  providers: [provideHttpClient(),
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
