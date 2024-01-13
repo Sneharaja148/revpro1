@@ -14,16 +14,6 @@ export class BasicPlanService {
 
   constructor(private http: HttpClient) { }
 
-  // getPlans(): Observable<i_plans[]> {
-  //   return this.http.get<i_plans[]>(this.apiUrl).pipe(
-  //     tap(data => console.log('Fetched plans:', data)),
-  //     catchError(error => {
-  //       console.error('Error fetching plans:', error);
-  //       throw error;
-  //     })
-  //   );
-  // }
-
   selectedPlans: any[] = [];
 
   getIndividualPlans(): Observable<i_plans[]> {
