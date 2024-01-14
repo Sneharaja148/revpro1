@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BasicPlanService } from './basic-plan.service';
 import { i_plans,b_plans } from '../../../card';
+import {users} from '../../../user';
 
 
 
@@ -11,6 +12,8 @@ import { i_plans,b_plans } from '../../../card';
   styleUrls: ['./basic-plan.component.css']
 })
 export class BasicPlanComponent implements OnInit {
+  updated!:users;
+  userProfile!:users;
   plans: i_plans[] | any = [];
   bplans: b_plans[] = [];
   selectedType: string = 'individual';
@@ -19,6 +22,16 @@ export class BasicPlanComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
+
+    const id:number=1;  
+   this.basicPlanService.getUserProfile(id).subscribe(data=>{
+   
+    this.userProfile=data;
+
+    console.log(this.userProfile.plan_id);
+    
+   
+   });
   }
 
   selectType(type: string): void {
@@ -41,31 +54,23 @@ export class BasicPlanComponent implements OnInit {
     this.selectType('individual'); // Default to individual plans
   }
 
-  // recharge(planItem: any): void {
-  //   const confirmRecharge = window.confirm(`Confirm recharge for ${planItem.plan_name} plan?`);
 
-  //   if (confirmRecharge) {
-  //     // Perform the recharge logic here
-  //     this.performRecharge(planItem);
-  //   } else {
-  //     // User clicked No, do something else or nothing
-  //   }
-  // }
-
-  // performRecharge(planItem: any): void {
-  //   // Your recharge logic here
-  //   console.log('Recharge performed for', planItem);
-  //   // Call your payment logic here, e.g., makePayment(planItem)
-  //   this.makePayment(planItem);
-  // }
-
-  // makePayment(planItem: any): void {
-  //   // Your payment logic here
-  //   console.log('Payment made for', planItem);
-  // }
-
- 
-  }
+ recharge(id:number,type:string)
+ {
+  console.log(type);
+  
+  
+    this.basicPlanService.rereq(id,type,this.userProfile).subscribe(
+      updatedUser => {
+        this.updated = updatedUser;
+        console.log('User profile updated:', updatedUser);
+      },
+      error=>console.error("updated",error)
+    );
+ }
+      
+ }
+  
 
 
   

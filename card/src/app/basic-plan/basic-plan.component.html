@@ -9,8 +9,7 @@
   <div class="card-container">
     <mat-card *ngFor="let planitems of getFilteredPlans()" class="card">
       <mat-card-header class="card-header">
-        <div mat-card-avatar class="header-avatar">
-          <!-- You can add an avatar if needed -->
+        <div mat-card-avatar class="header-avatar">   
         </div>
         <mat-card-title>
           <h3 class="card-price">₹{{ planitems.plan_price }}</h3>
@@ -35,12 +34,13 @@
           <div class="info">
             <div class="info-title">Internet</div>
             <div class="info-value">{{ planitems.plan_speed }}</div>
+
           </div>
         </div>
       </mat-card-content>
   
       <mat-card-actions class="card-footer">
-        <button mat-button class="button primary" aria-label="Recharge">Recharge</button>
+        <button mat-button class="button primary" aria-label="Recharge" (click)="recharge(planitems.id,planitems.plan_type)">Recharge</button>
         <button mat-button class="button tertiary" aria-label="View details">View details</button>
       </mat-card-actions>
     </mat-card>

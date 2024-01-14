@@ -12,7 +12,8 @@ export interface i_plans{
     billing_cycle:string,
     plan_name:string,
     plan_speed:string,
-    plan_price:number
+    plan_price:number,
+    plan_type:string
 
 }
 
@@ -21,6 +22,7 @@ export interface b_plans{
     billing_cycle:string,
     plan_name:string,
     plan_speed:string,
-    plan_price:number
+    plan_price:number,
+    plan_type:string
 
 }
