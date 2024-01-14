@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BasicPlanService } from './basic-plan.service';
 import { i_plans,b_plans } from '../../../card';
 import {users} from '../../../user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -18,7 +19,7 @@ export class BasicPlanComponent implements OnInit {
   bplans: b_plans[] = [];
   selectedType: string = 'individual';
 
-  constructor(private basicPlanService: BasicPlanService,private http : HttpClient) {}
+  constructor(private basicPlanService: BasicPlanService,private http : HttpClient, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -54,22 +55,35 @@ export class BasicPlanComponent implements OnInit {
     this.selectType('individual'); // Default to individual plans
   }
 
+updatedUser: users | undefined;
 
- recharge(id:number,type:string)
- {
+
+recharge(id: number, type: string): void {
   console.log(type);
-  
-  
-    this.basicPlanService.rereq(id,type,this.userProfile).subscribe(
-      updatedUser => {
-        this.updated = updatedUser;
-        console.log('User profile updated:', updatedUser);
+
+  if (this.userProfile) {
+    this.basicPlanService.rereq(id, type, this.userProfile).subscribe(
+      updatedUserData => {
+        this.updatedUser = updatedUserData;
+        console.log('User profile updated:', updatedUserData);
+
+        // Show success message
+        this.snackBar.open('Recharge successful', 'Close', {
+          duration: 3000,  // Duration in milliseconds
+        });
       },
-      error=>console.error("updated",error)
+      error => {
+        console.error('updated', error);
+
+        // Show error message
+        this.snackBar.open('Recharge failed', 'Close', {
+          duration: 3000,
+        });
+      }
     );
- }
-      
- }
+  }
+}
+}
   
 
 

@@ -19,7 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -49,6 +49,7 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     MatIconModule,
     MatButtonToggleModule,
+    MatSnackBarModule,
     
     
   ],
