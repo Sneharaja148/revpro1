@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, mergeApplicationConfig } from '@angular/core';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 // Import the Angular Material modules after Angular's BrowserModule.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,19 +20,14 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
-
-
-
+import { ROUTES, provideRouter } from '@angular/router';
+import { Router } from 'express';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicPlanComponent,
     UserPlanComponent,
-    
-   
     
   ],
   imports: [
@@ -50,10 +45,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatButtonToggleModule,
     MatSnackBarModule,
-    
-    
+     
   ],
-  providers: [provideHttpClient(),
+  
+  providers: [provideHttpClient(withFetch()),
+   
+    provideClientHydration()
     ],
   bootstrap: [AppComponent]
 })

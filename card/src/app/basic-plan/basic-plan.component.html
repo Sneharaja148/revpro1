@@ -1,6 +1,18 @@
 
+<nav class="nav">    
+  <!-- Add routing here to go back to home page  -->
+    <a href="#" class="logo logo1">Rev Speed</a>
+    <ul class="nav-links">
+      <!-- Add routing here  to go back to home page  -->
+      <a href="#" class="logo">Rev Speed</a>
 
-  <div class="toggle-buttons">
+      <!-- Add routing here to go back to user-profile page  -->
+      <li ><a class="logo" href="#">Profile</a></li>
+    </ul>
+    <button class="logout">Log Out</button>
+  </nav>
+
+  <div style="padding-top: 8vh;"  class="toggle-buttons">
     <mat-button-toggle-group [(ngModel)]="selectedType" class="toggle-group">
       <mat-button-toggle value="individual" class="toggle-button" (click)="selectType('individual')">Individual</mat-button-toggle>
       <mat-button-toggle value="business" class="toggle-button" (click)="selectType('business')">Business</mat-button-toggle>

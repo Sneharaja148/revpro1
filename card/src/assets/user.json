@@ -121,23 +121,8 @@
       "plan_speed": "500 Mbps",
       "plan_price": 2149.99,
       "plan_type": "business_plans"
-    },
-    {
-      "id": 16,
-      "billing_cycle": "Annually",
-      "plan_name": "Business Ultra Plan",
-      "plan_speed": "1 Gbps",
-      "plan_price": 2799.99,
-      "plan_type": "business_plans"
-    },
-    {
-      "id": 17,
-      "billing_cycle": "Annually",
-      "plan_name": "Business Ultra Plan",
-      "plan_speed": "1 Gbps",
-      "plan_price": 2799.99,
-      "plan_type": "business_plans"
     }
+
   ],
   "home_plans": [
     {
@@ -258,14 +243,6 @@
       "plan_name": "Premium Plan",
       "plan_speed": "150 Mbps",
       "plan_price": 669.99,
-      "plan_type":"home_plans"
-    },
-    {
-      "id": 16,
-      "billing_cycle": "Annually",
-      "plan_name": "Ultra Plan",
-      "plan_speed": "300 Mbps",
-      "plan_price": 899.99,
       "plan_type":"home_plans"
     }
   ],
