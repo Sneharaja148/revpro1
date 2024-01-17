@@ -13,7 +13,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { i_plans } from '../../card';
-import { UserPlanComponent } from './user-plan/user-plan.component';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ import { Router } from 'express';
   declarations: [
     AppComponent,
     BasicPlanComponent,
-    UserPlanComponent,
+   
     
   ],
   imports: [

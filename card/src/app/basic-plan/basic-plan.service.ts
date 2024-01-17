@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, tap ,of} from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { b_plans, i_plans } from '../../../card';
-import {users} from '../../../user'
+import { users } from '../../../user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasicPlanService {
-  private url='http://localhost:4000/customer_data';
-  private individualPlansUrl = 'http://localhost:4000/home_plans';
-  private businessPlansUrl = 'http://localhost:4000/business_plans';
+  private baseUrl = 'http://localhost:4000';
+  private customerDataUrl = `${this.baseUrl}/customer_data`;
+  private individualPlansUrl = `${this.baseUrl}/home_plans`;
+  private businessPlansUrl = `${this.baseUrl}/business_plans`;
 
-  constructor(private http: HttpClient,private snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   selectedPlans: any[] = [];
 
@@ -25,19 +26,19 @@ export class BasicPlanService {
   getBusinessPlans(): Observable<b_plans[]> {
     return this.http.get<b_plans[]>(this.businessPlansUrl);
   }
-  getUserProfile(id:number):Observable<users> {
-    console.log(`Fetching user profile for ID: ${id}`);
-    const urlid=`${this.url}/${id}`;
-  return this.http.get<users>(urlid);
-  }
-  rereq(id: number, type: string, user: users): Observable<users> {
-    console.log(user.plan_id);
 
+  getUserProfile(id: number): Observable<users> {
+    const url = `${this.baseUrl}/customer_data/${id}`;
+    return this.http.get<users>(url);
+  }
+
+  rereq(id: number, type: string, user: users): Observable<users> {
     user.plan_id = id;
     user.plan_type = type;
 
-    console.log(user.plan_type);
-    return this.http.put<users>(this.url, user).pipe(
+    const url = `${this.baseUrl}/customer_data/${id}`;
+
+    return this.http.put<users>(url, user).pipe(
       catchError(error => {
         console.error('error adding plan failed', error);
 
@@ -51,4 +52,3 @@ export class BasicPlanService {
     );
   }
 }
-

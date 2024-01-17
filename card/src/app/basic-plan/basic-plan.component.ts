@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BasicPlanService } from './basic-plan.service';
-import { i_plans,b_plans } from '../../../card';
-import {users} from '../../../user';
+import { i_plans, b_plans } from '../../../card';
+import { users } from '../../../user';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'app-basic-plan',
@@ -13,26 +10,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./basic-plan.component.css']
 })
 export class BasicPlanComponent implements OnInit {
-  updated!:users;
-  userProfile!:users;
-  plans: i_plans[] | any = [];
+  updatedUser: users | undefined;
+  userProfile: users | undefined;
+  plans: i_plans[] = [];
   bplans: b_plans[] = [];
   selectedType: string = 'individual';
 
-  constructor(private basicPlanService: BasicPlanService,private http : HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private basicPlanService: BasicPlanService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchData();
-
-    const id:number=1;  
-   this.basicPlanService.getUserProfile(id).subscribe(data=>{
-   
-    this.userProfile=data;
-
-    console.log(this.userProfile.plan_id);
-    
-   
-   });
+    const id: number = 1;
+    this.basicPlanService.getUserProfile(id).subscribe(data => {
+      this.userProfile = data;
+      console.log(this.userProfile?.plan_id);
+    });
   }
 
   selectType(type: string): void {
@@ -55,40 +47,29 @@ export class BasicPlanComponent implements OnInit {
     this.selectType('individual'); // Default to individual plans
   }
 
-updatedUser: users | undefined;
+  recharge(id: number, type: string): void {
+    console.log(type);
 
+    if (this.userProfile) {
+      this.basicPlanService.rereq(id, type, this.userProfile).subscribe(
+        updatedUserData => {
+          this.updatedUser = updatedUserData;
+          console.log('User profile updated:', updatedUserData);
 
-recharge(id: number, type: string): void {
-  console.log(type);
+          // Show success message
+          this.snackBar.open('Recharge successful', 'Close', {
+            duration: 3000,  // Duration in milliseconds
+          });
+        },
+        error => {
+          console.error('updated', error);
 
-  if (this.userProfile) {
-    this.basicPlanService.rereq(id, type, this.userProfile).subscribe(
-      updatedUserData => {
-        this.updatedUser = updatedUserData;
-        console.log('User profile updated:', updatedUserData);
-
-        // Show success message
-        this.snackBar.open('Recharge successful', 'Close', {
-          duration: 3000,  // Duration in milliseconds
-        });
-      },
-      error => {
-        console.error('updated', error);
-
-        // Show error message
-        this.snackBar.open('Recharge failed', 'Close', {
-          duration: 3000,
-        });
-      }
-    );
+          // Show error message
+          this.snackBar.open('Recharge failed', 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    }
   }
 }
-}
-  
-
-
-  
-
-
-
-
